@@ -2,19 +2,15 @@ import './App.css';
 import Header from './components/Header/Header'
 import CreateTodo from './components/CreateTodo/CreateTodo'
 import TodoContainer from './components/TodoContainer/TodoContainer';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 function App() {
-  const [todosArr, setTodosArr] = useState([
-    {title: 'Купить бананы',status: false, id: 1},
-    {title: 'Купить яблоки',status: false, id: 2},
-    {title: 'Купить ческнок',status: false, id: 3},
-    {title: 'Купить арбуз',status: false, id: 4},
-    {title: 'Купить картошку',status: false, id: 5},
-    {title: 'Купить грушу',status: false, id: 6}
-  ])
-
+  const [todosArr, setTodosArr] = useState(JSON.parse(localStorage.getItem('list')))
+  useEffect(() => {
+    localStorage.setItem('list', JSON.stringify(todosArr))
+    
+  }, [todosArr])
   const addTodo = (newStr) => {
     setTodosArr(
       [...todosArr,
@@ -55,6 +51,7 @@ function App() {
       <Header first_id={todosArrLen} last_id={todosArr.length}/>
       <CreateTodo addTodo={addTodo}/>
       <TodoContainer
+      
         todosArr={todosArr} 
         onDelete={onDelete} 
         onChange={onStatusChange}

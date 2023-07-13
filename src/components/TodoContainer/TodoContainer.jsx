@@ -5,7 +5,8 @@ import './TodoContainer.css'
 function TodoContainer(props) {
     return (
         <div className='wrapper' >
-            {
+            {   props.todosArr.length
+                ? 
                 props.todosArr.map((el) => 
                 <TodoItem 
                     id={el.id}
@@ -16,6 +17,8 @@ function TodoContainer(props) {
                     onStatus={props.onChange}
                     onEdit={props.onEdit}
                 />)
+                : 
+                <h1 className='wrapper_h1'>There are no items yetj</h1>
             }
         </div>
     )   
