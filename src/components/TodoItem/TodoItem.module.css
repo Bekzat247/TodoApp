@@ -1,0 +1,33 @@
+.Todo:nth-child(2n){
+    background-color: rgb(196, 190, 190);
+}
+.Todo{
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+}
+.Todo > div button{
+    background: #494949;
+    border: none;
+    border-radius: 6px;
+    color: #f0f8ff;
+    cursor: pointer;
+    padding: 10px 12px;
+    margin-left: 10px;
+}
+.checkbox1{
+    display: flex;
+    justify-content: space-between;
+}
+.compleate{
+    text-decoration: line-through;
+}
+.input{
+    border-radius: 6px;
+    font-size: 16px;
+    border: 1px solid rgb(177, 177, 177);
+    outline: none;
+    color: grey;
+}
