@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 
 function App() {
-  const [todosArr, setTodosArr] = useState(JSON.parse(localStorage.getItem('list')))
+  const [todosArr, setTodosArr] = useState(JSON.parse(localStorage.getItem('list')) || [])
   useEffect(() => {
     localStorage.setItem('list', JSON.stringify(todosArr))
     

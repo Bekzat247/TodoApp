@@ -18,7 +18,7 @@ function TodoContainer(props) {
                     onEdit={props.onEdit}
                 />)
                 : 
-                <h1 className='wrapper_h1'>There are no items yetj</h1>
+                <h1 className='wrapper_h1'>There are no items yet</h1>
             }
         </div>
     )   
