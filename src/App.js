@@ -2,61 +2,29 @@ import './App.css';
 import Header from './components/Header/Header'
 import CreateTodo from './components/CreateTodo/CreateTodo'
 import TodoContainer from './components/TodoContainer/TodoContainer';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import Filter from './components/filter/filter';
+// import { useSelector } from 'react-redux';
 
 
 function App() {
-  const [todosArr, setTodosArr] = useState(JSON.parse(localStorage.getItem('list')) || [])
-  useEffect(() => {
-    localStorage.setItem('list', JSON.stringify(todosArr))
-    
-  }, [todosArr])
-  const addTodo = (newStr) => {
-    setTodosArr(
-      [...todosArr,
-        {title: newStr, status: 0, id: Date.now()}
-      ]
-    )
-  }
-  
-  const onDelete = (id) => {
-    const newTodosArr = todosArr.filter((item) => item.id !== id)
-    setTodosArr(newTodosArr)
-  };
+  const [status, setStatus] = useState('All') 
+  // const todosArr = useSelector((state) => state.todos)
 
-  const uneversal = (id, text) => {
-    const newTodosArr = todosArr.map((item) => {
-      if (item.id === id) {
-        return { ...item, status: !item.status, title: text};
-      }
-      return item;
-    });
-    setTodosArr(newTodosArr);
-  }
+  //This is Filter! Thats be used in future!
+  // const newTodo = todosArr.filter((item) => {
+  //   if (status ==='All') return item
+  //   if (status === 'compleate' && item.status) return item
+  //   if (status === "Progress" && !item.status) return item
+  // })
 
-  const onStatusChange  = (id, text) => {
-    uneversal(id, text)
-  };
-
-  const onInputChange = (id, text) => {
-    uneversal(id , text)
-  }
-
-  const todosArrLen = todosArr.reduce((acc, item) => {
-    return acc + item.status
-  }, 0)
 
   return (
     <div className="App">
-      <Header first_id={todosArrLen} last_id={todosArr.length}/>
-      <CreateTodo addTodo={addTodo}/>
-      <TodoContainer
-      
-        todosArr={todosArr} 
-        onDelete={onDelete} 
-        onChange={onStatusChange}
-        onEdit={onInputChange}
-      />
+      <Header />
+      <CreateTodo />
+      <TodoContainer/>
+      <Filter setStatus={setStatus} status={status}/>
     </div>
   );
 }

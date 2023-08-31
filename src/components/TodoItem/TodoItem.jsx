@@ -1,22 +1,26 @@
 import { useState } from 'react';
 import css from'./TodoItem.module.css'
+import { useDispatch } from 'react-redux';
+import { InputChangeTodo, deleteTodo, statusChangeTodo } from '../../redux';
+
+
 
 function TodoItem (props) {
     const [isEdit, setIsEdit] = useState(true)
     const [inputValue, setInputValue] = useState(props.title)
-
+    const dispatch = useDispatch()
     const handleDelete = () => {
-        props.onDelete(props.id);
+        dispatch(deleteTodo(props.id))
     };
-    const handlechange = (e) => {
+    const handlechange = (e) => {   
         setInputValue(e.target.value)
     }
 
     const handleStatus = () => {
-        props.onStatus(props.id, props.title)
+        dispatch(statusChangeTodo(props.id))
     }
-    const handleSave = () => {
-        props.onEdit(props.id, inputValue)
+    const handleSave = () => {  
+        dispatch(InputChangeTodo({id: props.id, text: inputValue}))
         setIsEdit(true)
     }
     return <div className={css.Todo}>
